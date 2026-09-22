@@ -3,9 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// O sistema é de uso interno: a raiz leva direto ao painel, que por sua vez
+// exige autenticação (visitante não logado cai na tela de login).
+Route::redirect('/', '/dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

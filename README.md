@@ -9,9 +9,13 @@ Aplicação web para organizar as vendas de um restaurante e gerar as notas fisc
 Esta é a **estrutura inicial** do projeto. O que já está pronto:
 
 - Projeto Laravel configurado no padrão MVC
-- Autenticação completa: login, cadastro, recuperação de senha e edição de perfil
-- Layout base com Tailwind CSS
+- Acesso ao sistema: login, recuperação de senha e edição de perfil
+- Interface em português, com identidade do sistema
+- Painel inicial listando os módulos previstos
 - Banco de dados local em SQLite
+
+O sistema é de **uso interno**: não existe cadastro público de usuários. O acesso é
+criado pelo *seeder* (ver credenciais no passo 3).
 
 Ainda **não** implementado: cadastro de produtos, lançamento de pedidos e geração da nota fiscal.
 
@@ -102,7 +106,8 @@ Esse único comando faz toda a configuração:
 2. cria o arquivo `.env` a partir do `.env.example`;
 3. gera a chave de criptografia da aplicação;
 4. cria o banco SQLite e aplica as migrations (tabelas);
-5. instala as dependências do Node e compila o CSS/JS.
+5. cria o usuário de acesso ao sistema;
+6. instala as dependências do Node e compila o CSS/JS.
 
 ---
 
@@ -114,8 +119,15 @@ php artisan serve
 
 Acesse **<http://localhost:8000>**.
 
-Na primeira execução não existe nenhum usuário cadastrado. Acesse
-**<http://localhost:8000/register>** para criar a sua conta e entrar no sistema.
+Entre com as credenciais criadas pelo `composer run setup`:
+
+| Campo | Valor |
+| --- | --- |
+| E-mail | `proprietaria@restaurante.test` |
+| Senha | `senha1234` |
+
+São credenciais **apenas para uso local**, definidas no `.env` (`OWNER_EMAIL` e
+`OWNER_PASSWORD`). Se quiser outras, altere o `.env` e rode `php artisan db:seed`.
 
 ### Se for editar CSS ou JavaScript
 
@@ -135,6 +147,7 @@ npm run dev
 | `npm run dev` | Recompila CSS/JS automaticamente ao salvar |
 | `npm run build` | Compila CSS/JS para versão final |
 | `php artisan migrate` | Aplica as migrations pendentes no banco |
+| `php artisan db:seed` | Cria/garante o usuário de acesso ao sistema |
 | `php artisan test` | Roda os testes automatizados |
 | `php artisan route:list` | Lista todas as rotas da aplicação |
 
